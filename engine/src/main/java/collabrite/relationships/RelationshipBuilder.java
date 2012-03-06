@@ -44,12 +44,21 @@ public class RelationshipBuilder {
         this.DB_PATH = locationOfDB;
     }
 
+    /**
+     * Important method that needs to be called before performing
+     * any relationship operations such as {@link #createNode(String)}
+     */
     public void initialize() {
         graphDb = new EmbeddedGraphDatabase(DB_PATH);
         registerShutdownHook(graphDb);
         initialized = true;
     }
 
+    /**
+     * Delete all data that is managed by this class.
+     * 
+     * <b>NOTE:</b> Use with extreme care.
+     */
     public void deleteAllData() {
         try
         {
@@ -201,6 +210,9 @@ public class RelationshipBuilder {
         });
     }
 
+    /**
+     * An internal collection that manages the neo4j relationship types
+     */
     private static class RelationshipTypeCollection {
         private static Map<String, RelationshipType> relations = new HashMap<String, RelationshipType>();
 
