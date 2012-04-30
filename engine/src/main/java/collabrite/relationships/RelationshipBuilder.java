@@ -45,8 +45,8 @@ public class RelationshipBuilder {
     }
 
     /**
-     * Important method that needs to be called before performing
-     * any relationship operations such as {@link #createNode(String)}
+     * Important method that needs to be called before performing any relationship operations such as
+     * {@link #createNode(String)}
      */
     public void initialize() {
         graphDb = new EmbeddedGraphDatabase(DB_PATH);
@@ -56,17 +56,14 @@ public class RelationshipBuilder {
 
     /**
      * Delete all data that is managed by this class.
-     * 
+     *
      * <b>NOTE:</b> Use with extreme care.
      */
     public void deleteAllData() {
-        try
-        {
-            FileUtils.deleteRecursively( new File( DB_PATH ) );
-        }
-        catch ( IOException e )
-        {
-            throw new RuntimeException( e );
+        try {
+            FileUtils.deleteRecursively(new File(DB_PATH));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -2,7 +2,7 @@ package collabrite.test.relationships;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
- 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import collabrite.relationships.RelationshipBuilder;
 
 /**
  * Unit test the {@code RelationshipBuilder}
- * 
+ *
  * @author anil
  */
 public class RelationshipBuilderUnitTestCase {
