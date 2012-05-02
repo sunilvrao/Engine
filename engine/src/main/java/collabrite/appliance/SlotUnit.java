@@ -10,6 +10,33 @@ import java.io.Serializable;
  * @author anil
  */
 public interface SlotUnit extends Serializable, Lifecycle {
+    /**
+     * Set the {@link DataInput}
+     *
+     * @param dataInput
+     */
+    void setDataInput(DataInput<?> dataInput);
+
+    /**
+     * Get the {@link DataInput}
+     *
+     * @return
+     */
+    DataInput<?> getDataInput();
+
+    /**
+     * Set the {@link DataOutput}
+     *
+     * @param dataOutput
+     */
+    void setDataOutput(DataOutput dataOutput);
+
+    /**
+     * Get the {@link DataOutput}
+     *
+     * @return
+     */
+    DataOutput getDataOutput();
 
     /**
      * Indicates whether the {@link Slot} has finished execution.
