@@ -25,6 +25,7 @@ public class SequentialSlot extends AbstractSlot implements Slot {
      * @see {@link Slot#execute()}
      */
     public void execute() {
+        log.finest("SequentialSlot: starting");
         for (SlotUnit unit : units) {
             unit.execute();
 

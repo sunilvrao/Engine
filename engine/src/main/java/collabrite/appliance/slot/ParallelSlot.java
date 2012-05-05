@@ -25,7 +25,11 @@ public class ParallelSlot extends AbstractSlot implements Slot {
 
     public void setUp() {
         if (executorService == null) {
-            executorService = Executors.newFixedThreadPool(units.size());
+            int unitSize = units.size();
+            if(unitSize < 1)
+                throw new RuntimeException("Slots Units are null");
+            
+            executorService = Executors.newFixedThreadPool(unitSize);
         }
     }
 

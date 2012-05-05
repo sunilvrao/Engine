@@ -1,7 +1,9 @@
 package collabrite.appliance.slot.in;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.w3c.dom.Document;
 
@@ -23,9 +25,16 @@ public class DOMDataInput extends AbstractDataInput<Document> implements DataInp
             throw new IllegalArgumentException("Name is empty");
 
         try {
-            return DocumentUtil.getDocument(new File(fileName));
+            return DocumentUtil.getDocument(getFile(fileName));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    
+    private InputStream getFile(String fileName) throws IOException{
+        File file = new File(fileName);
+        if(file.exists() == false)
+            return getClass().getClassLoader().getResourceAsStream(fileName);
+        return new FileInputStream(file);
     }
 }
