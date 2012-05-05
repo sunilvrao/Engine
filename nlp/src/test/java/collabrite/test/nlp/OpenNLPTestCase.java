@@ -4,6 +4,7 @@ import opennlp.tools.util.Span;
 
 import org.junit.Test;
 
+import collabrite.nlp.opennlp.namefinders.LocationNameFinder;
 import collabrite.nlp.opennlp.namefinders.PersonNameFinder;
 import collabrite.nlp.opennlp.namefinders.SentenceDetectorHelper;
 import collabrite.nlp.opennlp.namefinders.TokenizerHelper;
@@ -21,6 +22,7 @@ public class OpenNLPTestCase {
     public void testNameFinder() throws Exception {
 
         PersonNameFinder pnf = new PersonNameFinder();
+        LocationNameFinder lnf = new LocationNameFinder();
 
         SentenceDetectorHelper sentenceHelper = new SentenceDetectorHelper();
         TokenizerHelper tokenizerHelper = new TokenizerHelper();
@@ -34,7 +36,14 @@ public class OpenNLPTestCase {
             }
             Span[] names = pnf.load(tokens);
             for (Span name : names) {
-                System.out.println("Name=" + name);
+                System.out.println("Name span=" + name);
+                System.out.println("Person Name=" + tokens[name.getStart()]);
+            }
+            names = lnf.load(tokens);
+            for (Span name : names) {
+                System.out.println("Location span=" + name);
+                int start = name.getStart();
+                System.out.println("Location Name=" + tokens[start]);
             }
         }
         pnf.tearDown();

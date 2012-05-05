@@ -7,6 +7,10 @@ import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinderModel;
 import opennlp.tools.util.Span;
 
+/**
+ * Base class for NameFinder modules
+ * @author anil
+ */
 public abstract class AbstractNameFinder {
     protected TokenNameFinderModel model = null;
     protected NameFinderME nameFinder = null;
@@ -29,15 +33,27 @@ public abstract class AbstractNameFinder {
         nameFinder = new NameFinderME(model);
     }
 
+    /**
+     * Clean up
+     */
     public void tearDown() {
         model = null;
         nameFinder.clearAdaptiveData();
     }
 
+    /**
+     * Given a set of sentences, detect names
+     * @param sentence
+     * @return
+     */
     public Span[] load(String[] sentence) {
         return nameFinder.find(sentence);
     }
 
+    /**
+     * Return the name of the model file that the module should load
+     * @return
+     */
     protected abstract String getModelName();
 
     protected void safeClose(InputStream is) {

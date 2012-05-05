@@ -7,6 +7,10 @@ import opennlp.tools.sentdetect.SentenceDetector;
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 
+/**
+ * A Helper class to detect sentences in text
+ * @author anil
+ */
 public class SentenceDetectorHelper {
     protected SentenceModel model = null;
     protected SentenceDetector sentenceDetector = null;
@@ -32,6 +36,11 @@ public class SentenceDetectorHelper {
         model = null;
     }
 
+    /**
+     * Given text, break into sentences
+     * @param text
+     * @return
+     */
     public String[] load(String text) {
         return sentenceDetector.sentDetect(text);
     }

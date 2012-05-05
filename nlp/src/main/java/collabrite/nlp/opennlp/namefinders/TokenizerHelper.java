@@ -8,7 +8,7 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 
 /**
- * Tokenizer sentences
+ * Tokenize sentences
  *
  * @author anil
  */
@@ -37,6 +37,11 @@ public class TokenizerHelper {
         model = null;
     }
 
+    /**
+     * Given a sentence, break into tokens
+     * @param sentence
+     * @return
+     */
     public String[] load(String sentence) {
         return tokenizer.tokenize(sentence);
     }
