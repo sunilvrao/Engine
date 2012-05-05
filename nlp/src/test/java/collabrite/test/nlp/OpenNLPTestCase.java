@@ -10,29 +10,30 @@ import collabrite.nlp.opennlp.namefinders.TokenizerHelper;
 
 /**
  * Some basic tests with OpenNLP
+ *
  * @author anil
  */
 public class OpenNLPTestCase {
-    String text = "Anil S lives in Chicago. He is passionate about technology. Anil is friend of Sunil. Sunil lives in Barrington." +
-    		" They met George and Mike sometime ago.";
-    
+    String text = "Anil S lives in Chicago. He is passionate about technology. Anil is friend of Sunil. Sunil lives in Barrington."
+            + " They met George and Mike sometime ago.";
+
     @Test
-    public void testNameFinder() throws Exception{
-        
+    public void testNameFinder() throws Exception {
+
         PersonNameFinder pnf = new PersonNameFinder();
-        
+
         SentenceDetectorHelper sentenceHelper = new SentenceDetectorHelper();
         TokenizerHelper tokenizerHelper = new TokenizerHelper();
-        
+
         String[] sentences = sentenceHelper.load(text);
-        for(String sentence: sentences){
+        for (String sentence : sentences) {
             System.out.println("Sentence=" + sentence);
             String[] tokens = tokenizerHelper.load(sentence);
-            for(String token: tokens){
-                System.out.println("Token=" + token); 
+            for (String token : tokens) {
+                System.out.println("Token=" + token);
             }
             Span[] names = pnf.load(tokens);
-            for(Span name: names){
+            for (Span name : names) {
                 System.out.println("Name=" + name);
             }
         }

@@ -9,47 +9,39 @@ import opennlp.tools.tokenize.TokenizerModel;
 
 /**
  * Tokenizer sentences
+ *
  * @author anil
  */
-public class TokenizerHelper{
-
-    Tokenizer tokenizer = null;
-    TokenizerModel model = null;
+public class TokenizerHelper {
+    protected Tokenizer tokenizer = null;
+    protected TokenizerModel model = null;
 
     public TokenizerHelper() {
-        setUp();
-        execute();
-    }
-     
-    public void setUp() {
         InputStream is = getClass().getClassLoader().getResourceAsStream("opennlp/models/namefinder/en-token.bin");
-        if(is == null)
+        if (is == null)
             throw new IllegalStateException("Unable to load NameFinder Model en-token.bin");
-        
+
         try {
             model = new TokenizerModel(is);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }finally{
-            if(is != null){
+        } finally {
+            if (is != null) {
                 safeClose(is);
             }
         }
-    }
- 
-    public void execute() {
         tokenizer = new TokenizerME(model);
     }
- 
-    public void tearDown() { 
+
+    public void tearDown() {
         model = null;
     }
-    
-    public String[] load(String sentence){
-            return tokenizer.tokenize(sentence);
+
+    public String[] load(String sentence) {
+        return tokenizer.tokenize(sentence);
     }
-    
-    private void safeClose(InputStream is){
+
+    private void safeClose(InputStream is) {
         try {
             is.close();
         } catch (IOException e) {
