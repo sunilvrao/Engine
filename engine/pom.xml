@@ -8,6 +8,11 @@
   <name>engine</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+    <dependency>  
+      <groupId>collabrite</groupId>
+      <artifactId>nlp</artifactId>
+      <version>${project.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.neo4j</groupId>
       <artifactId>neo4j</artifactId>
@@ -22,6 +27,16 @@
       <groupId>org.twitter4j</groupId>
       <artifactId>twitter4j-stream</artifactId>
       <version>2.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-maxent</artifactId>
+      <version>3.0.2-incubating</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.opennlp</groupId>
+      <artifactId>opennlp-tools</artifactId>
+      <version>1.5.2-incubating</version>
     </dependency>
     <dependency>
       <groupId>com.restfb</groupId>
