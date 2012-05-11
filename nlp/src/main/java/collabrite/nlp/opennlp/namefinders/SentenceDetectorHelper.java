@@ -9,6 +9,7 @@ import opennlp.tools.sentdetect.SentenceModel;
 
 /**
  * A Helper class to detect sentences in text
+ *
  * @author anil
  */
 public class SentenceDetectorHelper {
@@ -38,6 +39,7 @@ public class SentenceDetectorHelper {
 
     /**
      * Given text, break into sentences
+     *
      * @param text
      * @return
      */

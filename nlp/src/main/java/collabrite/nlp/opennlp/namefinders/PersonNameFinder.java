@@ -2,6 +2,7 @@ package collabrite.nlp.opennlp.namefinders;
 
 /**
  * A NameFinder to detect person names
+ *
  * @author anil
  */
 public class PersonNameFinder extends AbstractNameFinder {

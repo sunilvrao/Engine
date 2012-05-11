@@ -2,6 +2,7 @@ package collabrite.nlp.opennlp.namefinders;
 
 /**
  * A NameFinder to detect organization names
+ *
  * @author anil
  */
 public class OrganizationNameFinder extends AbstractNameFinder {
