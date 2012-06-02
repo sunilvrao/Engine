@@ -9,6 +9,9 @@ import com.restfb.types.Page;
  * @author anil
  */
 public class FacebookUtil {
+    
+    public enum FacebookSearchType{ post};
+    
     /**
      * Given an ID, get a public Page
      *
@@ -18,4 +21,5 @@ public class FacebookUtil {
     public static Page getPageWithID(String id) {
         return (new DefaultFacebookClient()).fetchObject(id, Page.class);
     }
+
 }

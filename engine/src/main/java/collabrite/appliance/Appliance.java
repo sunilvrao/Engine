@@ -27,7 +27,7 @@ public class Appliance implements Lifecycle {
         units.add(unit);
     }
 
-    public void addAllUnits(List<ApplianceUnit> theUnits) {
+    public void setUnits(List<ApplianceUnit> theUnits) {
         units.addAll(theUnits);
     }
 

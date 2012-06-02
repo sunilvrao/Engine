@@ -14,12 +14,22 @@ import collabrite.appliance.DataInput;
  */
 public class URLDataInput extends AbstractDataInput<InputStream> implements DataInput<InputStream> {
 
+    protected URL theURL = null;
     @Override
     public InputStream open() throws IOException {
+        return theURL.openStream();
+    }
+
+    @Override
+    public void initialize() throws IOException {
         String url = (String) options.get(ApplianceConstants.URL);
         if (url == null || url.isEmpty())
             throw new IllegalArgumentException("URL is empty");
-        URL theURL = new URL(url);
-        return theURL.openStream();
+        theURL = new URL(url);
+    }
+
+    @Override
+    public void cleanUp() throws IOException {
+        theURL = null;
     }
 }

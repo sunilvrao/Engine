@@ -19,4 +19,11 @@ public class SystemOutDataOutput extends AbstractDataOutput implements DataOutpu
             out.write(((String)data).getBytes());
         }
     }
+    @Override
+    public void initialize() throws IOException {
+    }
+    @Override
+    public void cleanUp() throws IOException {
+        out = null;
+    }
 }

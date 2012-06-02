@@ -29,7 +29,7 @@ public interface MapBasedOptions {
      *
      * @param theMap
      */
-    void loadAllOptions(Map<String, Object> theMap);
+    void setOptions(Map<String, Object> theMap);
 
     /**
      * Get the Options as a read only {@link Map}

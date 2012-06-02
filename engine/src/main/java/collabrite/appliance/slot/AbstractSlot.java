@@ -48,13 +48,12 @@ public abstract class AbstractSlot implements Slot {
     }
 
     @Override
-    public void addAllSlotUnits(List<SlotUnit> theList) {
-        units.addAll(theList);
-    }
-
-    @Override
     public boolean removeSlotUnit(SlotUnit slot) {
         return units.remove(slot);
+    }
+    
+    public void setSlotUnits(List<SlotUnit> theList){
+        units.addAll(theList);
     }
 
     @Override

@@ -14,15 +14,31 @@ import collabrite.appliance.DataInput;
  * @author anil
  */
 public class FileDataInput extends AbstractDataInput<InputStream> implements DataInput<InputStream> {
+    protected InputStream fis = null;
     @Override
     public InputStream open() throws IOException {
-        String fileName = (String) options.get(ApplianceConstants.NAME);
-        if (fileName == null || fileName.isEmpty())
-            throw new IllegalArgumentException("Name is empty");
-        File theFile = new File(fileName);
-        if(theFile.exists() == false){
-            return getClass().getClassLoader().getResourceAsStream(fileName);
+        return fis;
+    }
+
+    @Override
+    public void initialize() throws IOException {
+        if(fis == null){
+            String fileName = (String) options.get(ApplianceConstants.NAME);
+            if (fileName == null || fileName.isEmpty())
+                throw new IllegalArgumentException("Name is empty");
+            File theFile = new File(fileName);
+            if(theFile.exists() == false){
+                fis = getClass().getClassLoader().getResourceAsStream(fileName);
+            } else {
+                fis =  new FileInputStream(new File(fileName));   
+            }
         }
-        return new FileInputStream(new File(fileName));
+    }
+
+    @Override
+    public void cleanUp() throws IOException {
+        if(fis != null){
+            safeClose(fis);
+        }
     }
 }

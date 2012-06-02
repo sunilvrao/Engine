@@ -1,5 +1,8 @@
 package collabrite.appliance.slot.out;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,12 +30,29 @@ public abstract class AbstractDataOutput implements DataOutput {
     }
 
     @Override
-    public void loadAllOptions(Map<String, Object> theMap) {
+    public void setOptions(Map<String, Object> theMap) {
         options.putAll(theMap);
     }
 
     @Override
     public Map<String, Object> options() {
         return Collections.unmodifiableMap(options);
+    }
+    
+    protected void safeClose(OutputStream fos){
+        if(fos != null){
+            try {
+                fos.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+    protected void safeClose(InputStream is){
+        if(is != null){
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+        }
     }
 }

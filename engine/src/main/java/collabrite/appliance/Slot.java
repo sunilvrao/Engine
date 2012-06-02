@@ -24,7 +24,7 @@ public interface Slot extends Serializable, Lifecycle {
      *
      * @param theList
      */
-    void addAllSlotUnits(List<SlotUnit> theList);
+    void setSlotUnits(List<SlotUnit> theList);
 
     /**
      * Remove a {@link SlotUnit}
