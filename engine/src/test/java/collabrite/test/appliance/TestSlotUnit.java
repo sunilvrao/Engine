@@ -22,6 +22,12 @@ public class TestSlotUnit implements SlotUnit {
 
     @Override
     public void setUp() { 
+        try {
+            input.initialize();
+            output.initialize();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -42,6 +48,12 @@ public class TestSlotUnit implements SlotUnit {
 
     @Override
     public void tearDown() {
+        try {
+            input.cleanUp();
+            output.cleanUp();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
