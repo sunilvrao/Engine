@@ -1,0 +1,73 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+<!--  Appliance consists of a list of appliance units -->
+<bean id="appliance" class="collabrite.appliance.Appliance">
+  <property name="units">
+    <list>
+      <ref bean="unit"/>
+    </list>
+  </property>
+</bean>
+
+<!--  Appliance Unit consists of slots -->
+<bean id="unit" class="collabrite.appliance.ApplianceUnit">
+  <constructor-arg>
+     <list>
+       <ref bean="slot1"></ref>
+       <ref bean="slot2"></ref>
+     </list>
+  </constructor-arg>
+</bean>
+
+<bean id = "slot1" class="collabrite.appliance.slot.SequentialSlot" >
+  <property name="slotUnits">
+    <list>
+       <ref bean="fileSlotUnit"/>
+    </list>
+  </property>
+</bean>
+
+<bean id = "slot2" class="collabrite.appliance.slot.SequentialSlot" >
+<property name="slotUnits">
+    <list>
+       <ref bean="fileSlotUnit2"/>
+    </list>
+  </property>
+</bean>           
+
+<bean id = "fileSlotUnit" class="collabrite.test.appliance.TestSlotUnit">
+   <property name="dataInput" ref="fdi"></property>
+   <property name="dataOutput" ref="sysout"></property>
+</bean>
+<bean id = "fileSlotUnit2" class="collabrite.test.appliance.TestDOMSlotUnit">
+   <property name="dataInput" ref="ddi"></property>
+   <property name="dataOutput" ref="sysout"></property>
+</bean>
+
+<bean id = "sysout" class="collabrite.appliance.slot.out.SystemOutDataOutput" />
+
+<bean id="fdi" class="collabrite.appliance.slot.in.FileDataInput">
+  <property name="options">
+  <map>
+      <entry key="Name" value="appliance/slots/dummyFile.txt"/>
+  </map>
+  </property> 
+</bean>
+
+<bean id="ddi" class="collabrite.appliance.slot.in.DOMDataInput">
+  <property name="options">
+  <map>
+      <entry key="Name" value="appliance/slots/some.xml"/>
+  </map>
+  </property> 
+</bean>
+
+</beans>
