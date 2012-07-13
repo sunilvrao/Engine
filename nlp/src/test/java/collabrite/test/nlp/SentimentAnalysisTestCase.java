@@ -22,9 +22,11 @@ public class SentimentAnalysisTestCase {
         Sentiment positive = sa.analyse(iphonePositive);
         assertTrue(positive.getPositiveCount() > positive.getNegativeCount());
         System.out.println("Positive=" + positive);
+        assertTrue(positive.overallPositive());
 
         Sentiment negative = sa.analyse(winNegative);
         assertTrue(negative.getPositiveCount() < negative.getNegativeCount());
         System.out.println("Negative=" + negative);
+        assertTrue(negative.overallNegative());
     }
 }

@@ -68,7 +68,7 @@ public class SentimentAnalysis {
         public boolean overallNegative() {
             return negativeCount > positiveCount;
         }
-
+        
         @Override
         public String toString() {
             return "Sentiment [positiveCount=" + positiveCount + ", negativeCount=" + negativeCount + "]";
