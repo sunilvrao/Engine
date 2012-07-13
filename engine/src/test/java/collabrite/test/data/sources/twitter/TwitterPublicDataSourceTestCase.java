@@ -18,7 +18,7 @@ public class TwitterPublicDataSourceTestCase {
     public void query() throws Exception {
         System.setProperty("twitter4j.debug", "true");
         TwitterPublicDataSource ds = new TwitterPublicDataSource();
-        QueryResult result = ds.query("yonex", "en");
+        QueryResult result = ds.query("judcon", "en");
         display(result);
         List<Tweet> tweets = result.getTweets();
         System.out.println("Number of tweet=" + tweets.size());

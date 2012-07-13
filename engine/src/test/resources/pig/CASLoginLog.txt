@@ -1,0 +1,13 @@
+Date    Action  Username        Service         Ticket
+28.3.2012 2:28:01       SERVICE_TICKET_CREATED  user1   https://myurl   ST-13133--org-sso
+28.3.2012 2:27:30       SERVICE_TICKET_CREATED  user2   https://myurl/url ST-13046--j-sso
+28.3.2012 2:27:17       TICKET_GRANTING_TICKET_DESTROYED                        TGT-3380--j-sso
+28.3.2012 2:27:17       SERVICE_TICKET_CREATED  user3   https://c/thread/197282?tstart=0        ST-13045-j-sso
+28.3.2012 2:27:16       TICKET_GRANTING_TICKET_CREATED  firstlion               TGT-3567--j-sso
+28.3.2012 2:26:30       SERVICE_TICKET_CREATED  user4   https://issues.j.org/secure/D.jspa      ST-13044--j-sso
+27.3.2012 23:12:37      SERVICE_TICKET_CREATED  user2   https://c/thread/151832?start=15&tstart=0       ST-13048--j-sso
+27.3.2012 22:51:51      SERVICE_TICKET_CREATED  user5   https://c/login.jspa    ST-13038--j-sso
+27.3.2012 22:51:50      TICKET_GRANTING_TICKET_CREATED  user5           TGT-3527--j-sso
+27.3.2012 22:51:49      TICKET_GRANTING_TICKET_CREATED  user5           TGT-3526--j-sso
+26.3.2012 14:17:27      SERVICE_TICKET_CREATED  user1   https://c/message/725882?tstart=0       ST-11709--j-sso
+26.3.2012 13:02:51      TICKET_GRANTING_TICKET_CREATED  user1           TGT-3223--j-sso

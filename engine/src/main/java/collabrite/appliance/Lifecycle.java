@@ -1,5 +1,7 @@
 package collabrite.appliance;
 
+import java.io.IOException;
+
 /**
  * <p>
  * Stages of life
@@ -11,7 +13,7 @@ public interface Lifecycle {
     /**
      * Initialize
      */
-    void setUp();
+    void setUp() throws IOException;
 
     /**
      * Execute Operations
@@ -21,5 +23,5 @@ public interface Lifecycle {
     /**
      * Tear down/Finish
      */
-    void tearDown();
+    void tearDown() throws IOException;
 }

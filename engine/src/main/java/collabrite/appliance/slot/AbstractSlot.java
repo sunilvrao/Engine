@@ -1,5 +1,6 @@
 package collabrite.appliance.slot;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +19,10 @@ public abstract class AbstractSlot implements Slot {
     protected List<SlotUnit> units = new ArrayList<SlotUnit>();
 
     /**
+     * @throws IOException 
      * @see {@link Lifecycle#setUp()}
      */
-    public void setUp() {
+    public void setUp() throws IOException {
         for (SlotUnit unit : units) {
             unit.setUp();
         }
@@ -34,9 +36,10 @@ public abstract class AbstractSlot implements Slot {
         }
     }
     /**
+     * @throws IOException 
      * @see {@link Lifecycle#tearDown()}
      */
-    public void tearDown() {
+    public void tearDown() throws IOException {
         for (SlotUnit unit : units) {
             unit.tearDown();
         }

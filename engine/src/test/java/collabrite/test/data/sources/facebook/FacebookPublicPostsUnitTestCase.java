@@ -17,10 +17,11 @@ import com.restfb.types.Post;
  */
 public class FacebookPublicPostsUnitTestCase {
 
-    @Test @Ignore
+    @Test 
+    @Ignore
     public void testSearch() throws Exception{
         FacebookPublicSearching search = new FacebookPublicSearching();
-        Connection<Post> connection = search.getConnectionForPublicPosts("tennis");
+        Connection<Post> connection = search.getConnectionForPublicPosts("walgreens");
         Iterator<List<Post>> iterator = connection.iterator();
         while(iterator.hasNext()){
             List<Post> list = iterator.next();

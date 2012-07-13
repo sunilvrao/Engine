@@ -1,5 +1,6 @@
 package collabrite.appliance;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,14 @@ public class Appliance implements Lifecycle {
     public Appliance(String name) {
         this.name = name;
     }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void addUnit(ApplianceUnit unit) {
         units.add(unit);
@@ -40,10 +49,11 @@ public class Appliance implements Lifecycle {
     }
 
     /**
+     * @throws IOException 
      * @see Lifecycle#setUp()
      */
     @Override
-    public void setUp() {
+    public void setUp() throws IOException {
         for (ApplianceUnit unit : units) {
             unit.setUp();
         }
@@ -60,10 +70,11 @@ public class Appliance implements Lifecycle {
     }
 
     /**
+     * @throws IOException 
      * @see Lifecycle#tearDown()
      */
     @Override
-    public void tearDown() {
+    public void tearDown() throws IOException {
         for (ApplianceUnit unit : units) {
             unit.tearDown();
         }
