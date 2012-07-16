@@ -12,6 +12,12 @@ import twitter4j.TwitterFactory;
  * @author anil
  */
 public class TwitterPublicDataSource {
+    
+    private int page = 1;
+    
+    public void setPage(int page){
+        this.page = page;
+    }
 
     /**
      * <p>
@@ -29,6 +35,8 @@ public class TwitterPublicDataSource {
     public QueryResult query(String queryStr, String lang) throws TwitterException {
         Twitter twitter = new TwitterFactory().getInstance();
         Query query = new Query(queryStr);
+        query.setPage(page);
+        query.setRpp(100);
         query.setLang(lang);
         return twitter.search(query);
     }

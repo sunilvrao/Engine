@@ -9,6 +9,7 @@ import java.util.Map;
 
 import collabrite.appliance.DataInput;
 import collabrite.appliance.DataOutput;
+import collabrite.appliance.DataTransform;
 
 /**
  * Base class for all {@link DataInput}
@@ -16,8 +17,13 @@ import collabrite.appliance.DataOutput;
  * @author anil
  */
 public abstract class AbstractDataOutput implements DataOutput {
+    
+    protected DataTransform dataTransform = null;
 
     protected Map<String, Object> options = new HashMap<String, Object>();
+    
+    // Set the initialized flag
+    protected boolean initialized = false;
 
     @Override
     public void addOption(String key, Object value) {
@@ -27,6 +33,13 @@ public abstract class AbstractDataOutput implements DataOutput {
     @Override
     public boolean removeOption(String key) {
         return options.remove(key) != null;
+    } 
+
+    /**
+     * Set the data transform
+     */
+    public void setDataTransform(DataTransform dataTransform) {
+        this.dataTransform = dataTransform;
     }
 
     @Override

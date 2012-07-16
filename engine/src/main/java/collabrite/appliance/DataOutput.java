@@ -13,6 +13,15 @@ public interface DataOutput extends MapBasedOptions {
      * @throws IOException
      */
     void initialize() throws IOException;
+    
+    /**
+     * Optionally set a {@link DataTransform} instance
+     * that will preprocess before storage.
+     * 
+     * @param dataTransform
+     * @throws IOException
+     */
+    void setDataTransform(DataTransform dataTransform) throws IOException;
     /**
      * Store the data
      * @param data

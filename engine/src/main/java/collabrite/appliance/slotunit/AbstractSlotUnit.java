@@ -11,6 +11,9 @@ import collabrite.appliance.MapBasedOptions;
 import collabrite.appliance.SlotUnit;
 
 public abstract class AbstractSlotUnit implements SlotUnit, MapBasedOptions {
+    
+    public static final String DELAY = "DELAY";
+    
     private static final long serialVersionUID = 1L;
 
     protected Map<String,Object> options = new HashMap<String,Object>();

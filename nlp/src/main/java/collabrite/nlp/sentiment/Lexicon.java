@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * Represents a collection of positive and negative words
- *
  * @author anil
  */
 public class Lexicon {
