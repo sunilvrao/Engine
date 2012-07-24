@@ -30,6 +30,8 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
 
     @Override
     public void execute() {
+        if(dataOutput == null)
+            throw new RuntimeException("Data Output not injected");
         if(searchTerm == null)
             throw new RuntimeException("Search Term not injected");
         
@@ -42,11 +44,11 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
             List<Post> list = iterator.next();
             for(Post post: list){
                 try {
-                    dataOutput.store(post.toString());
+                    dataOutput.store(post);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }
+            } 
         }
         
         this.finishedExecutionFlag = true;

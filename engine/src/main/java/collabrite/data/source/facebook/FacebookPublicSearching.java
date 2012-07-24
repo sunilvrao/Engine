@@ -12,6 +12,7 @@ public class FacebookPublicSearching {
     public Connection<Post> getConnectionForPublicPosts(String query){
         return publicOnlyFacebookClient.fetchConnection("search", Post.class,
                 Parameter.with("q", query), 
+                Parameter.with("limit", 100),
                 Parameter.with("type", "post"));
     }
      
