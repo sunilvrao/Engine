@@ -13,8 +13,11 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.index.AutoIndexer;
+import org.neo4j.graphdb.index.ReadableIndex;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 import org.neo4j.kernel.impl.util.FileUtils;
+import org.neo4j.tooling.GlobalGraphOperations;
 
 /**
  * Main class to build relationships
@@ -51,6 +54,7 @@ public class RelationshipBuilder {
     public void initialize() {
         graphDb = new EmbeddedGraphDatabase(DB_PATH);
         registerShutdownHook(graphDb);
+        setAutoIndexerProperties(new String[] {"name"}); //by default, auto index name
         initialized = true;
     }
 
@@ -160,6 +164,56 @@ public class RelationshipBuilder {
         list.toArray(results);
         return results;
     }
+    
+    /**
+     * Get Related Nodes
+     * @param node
+     * @param relationship
+     * @param direction
+     * @return
+     * @throws RelationshipException
+     */
+    public Iterable<Relationship> getRelatedNodes(Node node, String relationship, Direction direction) throws RelationshipException{
+        check();
+        RelationshipType relationshipType = RelationshipTypeCollection.get(relationship);
+        return node.getRelationships(Direction.OUTGOING, relationshipType);
+    }
+    
+    /**
+     * Get the auto index to search
+     * @return
+     */
+    public ReadableIndex<Node> getAutoIndex(){
+        return graphDb.index()
+                .getNodeAutoIndexer()
+                .getAutoIndex();
+    }
+    
+    /**
+     * Set properties to auto index
+     * @param properties
+     */
+    public void setAutoIndexerProperties(String[] properties){
+        AutoIndexer<Node> nodeAutoIndexer = graphDb.index()
+                .getNodeAutoIndexer();
+        for(String prop: properties){
+            nodeAutoIndexer.startAutoIndexingProperty( prop ); 
+        }
+        nodeAutoIndexer.setEnabled(true);
+    }
+    
+    /**
+     * Check whether a node has property
+     * @param node
+     * @param propertyName
+     * @return
+     * @throws RelationshipException
+     */
+    public boolean hasProperty(long node, String propertyName) throws RelationshipException{
+        check();
+        Node node1 = graphDb.getNodeById(node);
+        return node1.hasProperty(propertyName);
+    }
 
     /**
      * Get an iterable for the property keys
@@ -171,8 +225,16 @@ public class RelationshipBuilder {
     public Iterable<String> getPropertyKeys(long node) throws RelationshipException {
         check();
         Node node1 = graphDb.getNodeById(node);
-
         return node1.getPropertyKeys();
+    }
+    
+    /**
+     * Get all the nodes stored
+     * @return
+     */
+    public Iterable<Node> getNodes(){
+        GlobalGraphOperations go = GlobalGraphOperations.at(graphDb);
+        return go.getAllNodes();
     }
 
     /**
@@ -186,6 +248,10 @@ public class RelationshipBuilder {
     public Object getProperty(long node, String key) throws RelationshipException {
         check();
         Node node1 = graphDb.getNodeById(node);
+        
+        if(node1.hasProperty(key) == false){
+            return null;
+        }
 
         return node1.getProperty(key);
     }
