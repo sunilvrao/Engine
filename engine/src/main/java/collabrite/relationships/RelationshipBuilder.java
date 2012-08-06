@@ -229,6 +229,16 @@ public class RelationshipBuilder {
     }
     
     /**
+     * Return a {@link Node} given its name
+     * @param name
+     * @return
+     */
+    public Node getNodeWithName(String name){ 
+        ReadableIndex<Node> autoNodeIndex = getAutoIndex();
+        return autoNodeIndex.get( "name", name ).getSingle() ;
+    }
+    
+    /**
      * Get all the nodes stored
      * @return
      */

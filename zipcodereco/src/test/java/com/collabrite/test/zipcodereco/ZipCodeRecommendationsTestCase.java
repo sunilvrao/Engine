@@ -2,6 +2,8 @@ package com.collabrite.test.zipcodereco;
 
 import static com.collabrite.zipcode.recommendations.ZipCodeRecommendations.LIVES;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,6 +11,7 @@ import scala.actors.threadpool.Arrays;
 import collabrite.relationships.RelationshipBuilder;
 
 import com.collabrite.zipcode.recommendations.ZipCodeRecommendations;
+import com.collabrite.zipcode.recommendations.ZipCodeRecommendations.ProductFrequency;
 
 /**
  * Unit test the {@link ZipCodeRecommendations}
@@ -48,7 +51,7 @@ public class ZipCodeRecommendationsTestCase {
         long nodeVince = builder.createNode("vince");
         
         zipRecommendations.storeBoughtProducts(nodeAnil, new String[] {"iphone", "ipod", "glasses"});
-        zipRecommendations.storeBoughtProducts(nodeTanveer, new String[] {"tv", "kindle", "lawnmower"});
+        zipRecommendations.storeBoughtProducts(nodeTanveer, new String[] {"glasses", "tv", "kindle", "lawnmower"});
         zipRecommendations.storeBoughtProducts(nodeSunil, new String[] {"iphone", "laptop", "vacation"});
         zipRecommendations.storeBoughtProducts(nodeVineet, new String[] {"baseball", "candy", "tshirts"});
         zipRecommendations.storeBoughtProducts(nodeTom, new String[] {"laptop"});
@@ -82,5 +85,21 @@ public class ZipCodeRecommendationsTestCase {
         System.out.println("60004::" + Arrays.toString(zipRecommendations.recommendations("60004")));
         System.out.println("60005::" + Arrays.toString(zipRecommendations.recommendations("60005")));
         System.out.println("60189::" + Arrays.toString(zipRecommendations.recommendations("60189")));
+        
+
+        System.out.println("Frequency Recommendations based on zip");
+        printFrequency("60304");
+        printFrequency("60004");
+        printFrequency("60005");
+        printFrequency("60189");
+    }
+    
+    private void printFrequency(String zip) throws Exception{
+        List<ProductFrequency> productFrequencies = zipRecommendations.frequencyOfProducts(zip);
+        StringBuilder sb = new StringBuilder(zip + "::");
+        for(ProductFrequency freq: productFrequencies){
+            sb.append("[").append(freq.getProductName()).append("/").append(""+ freq.getFrequency()).append("]");
+        }
+        System.out.println(sb.toString());
     }
 }
