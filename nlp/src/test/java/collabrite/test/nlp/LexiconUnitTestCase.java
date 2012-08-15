@@ -28,5 +28,8 @@ public class LexiconUnitTestCase {
         assertTrue(lex.isNegativeWord("bad"));
         assertTrue(lex.isNegativeWord("dirty"));
         assertTrue(lex.isNegativeWord("awful"));
+         
+        assertTrue(lex.isUncertainWord("doubt"));
+        assertTrue(lex.isStrongWord("clearly"));
     }
 }
