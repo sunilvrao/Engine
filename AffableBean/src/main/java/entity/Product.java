@@ -38,6 +38,8 @@ public class Product implements Serializable {
     @Column(name = "name")
     */private String name;
     
+    private String description;
+    
     /*@Basic(optional = false)
     @Column(name = "price")
     */private BigDecimal price;
@@ -114,6 +116,14 @@ public class Product implements Serializable {
 
     public void setOrderedProductCollection(Collection<OrderedProduct> orderedProductCollection) {
         this.orderedProductCollection = orderedProductCollection;
+    } 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

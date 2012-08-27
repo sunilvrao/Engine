@@ -8,20 +8,28 @@
 
 package controller;
 
-import cart.ShoppingCart;
-import entity.Category;
-import entity.Product;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map; 
+import java.util.Map;
+
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException; 
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import session.CategoryFacade;
 import session.OrderManager;
 import session.ProductFacade;
+import util.RecUtil;
 import validate.Validator;
+import cart.ShoppingCart;
+import cart.ShoppingCartItem;
+import entity.Category;
+import entity.Product;
 
 /**
  *
@@ -43,6 +51,8 @@ public class ControllerServlet extends HttpServlet {
     private CategoryFacade categoryFacade = new CategoryFacade(); 
     private ProductFacade productFacade = new ProductFacade(); 
     private OrderManager orderManager = new OrderManager();
+    
+    private RecUtil recommendationUtil = new RecUtil();
 
 
     @Override
@@ -252,6 +262,13 @@ public class ControllerServlet extends HttpServlet {
                     // if order processed successfully send user to confirmation page
                     if (orderId != 0) {
 
+                        String userID = "anil";
+                        List<ShoppingCartItem> items = cart.getItems();
+                        for(ShoppingCartItem item: items){
+                            //Send information to recommendation gatherer
+                            recommendationUtil.postBuy(item.getProduct(), userID, session.getId());   
+                        }
+                        
                         // in case language was set using toggle, get language choice before destroying session
                         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
                         String language = "";

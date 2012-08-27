@@ -83,6 +83,7 @@ public class ProductFacade extends AbstractFacade<Product> {
                 product.setId(rs.getInt(1));
                 product.setName(rs.getString(2));
                 product.setPrice(rs.getBigDecimal(3));
+                product.setDescription(rs.getString(4));
                 product.setLastUpdate(rs.getDate(5));
                 Short categoryId = rs.getShort(6);
                 product.setCategory(categoryFacade.find(categoryId));
