@@ -17,7 +17,7 @@
                     &nbsp;&nbsp;::&nbsp;&nbsp;
                     <a href="<c:url value='#'/>"><fmt:message key="contact" /></a>
                     &nbsp;&nbsp;&copy;&nbsp;&nbsp;
-                    2010 the affable bean</p>
+                    2012 the affable bean</p>
             </div>
         </div>
     </body>
