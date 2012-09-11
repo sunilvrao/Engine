@@ -11,6 +11,7 @@ import collabrite.appliance.SlotUnit;
 
 /**
  * A base class for implementations of {@link Slot}
+ *
  * @author anil
  */
 public abstract class AbstractSlot implements Slot {
@@ -19,7 +20,7 @@ public abstract class AbstractSlot implements Slot {
     protected List<SlotUnit> units = new ArrayList<SlotUnit>();
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see {@link Lifecycle#setUp()}
      */
     public void setUp() throws IOException {
@@ -27,6 +28,7 @@ public abstract class AbstractSlot implements Slot {
             unit.setUp();
         }
     }
+
     /**
      * @see {@link Lifecycle#execute()}
      */
@@ -35,8 +37,9 @@ public abstract class AbstractSlot implements Slot {
             unit.execute();
         }
     }
+
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see {@link Lifecycle#tearDown()}
      */
     public void tearDown() throws IOException {
@@ -54,8 +57,8 @@ public abstract class AbstractSlot implements Slot {
     public boolean removeSlotUnit(SlotUnit slot) {
         return units.remove(slot);
     }
-    
-    public void setSlotUnits(List<SlotUnit> theList){
+
+    public void setSlotUnits(List<SlotUnit> theList) {
         units.addAll(theList);
     }
 

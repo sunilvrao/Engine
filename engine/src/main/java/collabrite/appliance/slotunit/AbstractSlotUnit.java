@@ -11,12 +11,12 @@ import collabrite.appliance.MapBasedOptions;
 import collabrite.appliance.SlotUnit;
 
 public abstract class AbstractSlotUnit implements SlotUnit, MapBasedOptions {
-    
+
     public static final String DELAY = "DELAY";
-    
+
     private static final long serialVersionUID = 1L;
 
-    protected Map<String,Object> options = new HashMap<String,Object>();
+    protected Map<String, Object> options = new HashMap<String, Object>();
     protected boolean finishedExecutionFlag;
 
     protected DataInput<?> dataInput = null;
@@ -24,11 +24,11 @@ public abstract class AbstractSlotUnit implements SlotUnit, MapBasedOptions {
 
     @Override
     public void setUp() throws IOException {
-        if(dataInput != null){ 
-            dataInput.initialize(); 
+        if (dataInput != null) {
+            dataInput.initialize();
         }
-        if(dataOutput != null){ 
-            dataOutput.initialize(); 
+        if (dataOutput != null) {
+            dataOutput.initialize();
         }
     }
 
@@ -36,38 +36,38 @@ public abstract class AbstractSlotUnit implements SlotUnit, MapBasedOptions {
 
     @Override
     public void tearDown() throws IOException {
-        if(dataInput != null){ 
-            dataInput.cleanUp(); 
+        if (dataInput != null) {
+            dataInput.cleanUp();
         }
-        if(dataOutput != null) {
+        if (dataOutput != null) {
             dataOutput.cleanUp();
         }
     }
 
     @Override
-    public void setDataInput(DataInput<?> dataInput){
+    public void setDataInput(DataInput<?> dataInput) {
         this.dataInput = dataInput;
     }
 
     @Override
-    public DataInput<?> getDataInput(){
+    public DataInput<?> getDataInput() {
         return this.dataInput;
     }
 
     @Override
-    public void setDataOutput(DataOutput dataOutput){
+    public void setDataOutput(DataOutput dataOutput) {
         this.dataOutput = dataOutput;
     }
 
     @Override
-    public DataOutput getDataOutput(){
+    public DataOutput getDataOutput() {
         return this.dataOutput;
     }
 
     @Override
     public boolean finishedExecution() {
         return finishedExecutionFlag;
-    } 
+    }
 
     @Override
     public void addOption(String key, Object value) {
@@ -90,7 +90,7 @@ public abstract class AbstractSlotUnit implements SlotUnit, MapBasedOptions {
     }
 
     @Override
-    public Map<String, Object> options() { 
+    public Map<String, Object> options() {
         return Collections.unmodifiableMap(options);
     }
 }

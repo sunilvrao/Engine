@@ -9,9 +9,11 @@ import com.restfb.types.Page;
  * @author anil
  */
 public class FacebookUtil {
-    
-    public enum FacebookSearchType{ post};
-    
+
+    public enum FacebookSearchType {
+        post
+    };
+
     /**
      * Given an ID, get a public Page
      *

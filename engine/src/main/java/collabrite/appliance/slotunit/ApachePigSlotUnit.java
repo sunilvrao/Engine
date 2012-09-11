@@ -10,6 +10,7 @@ import collabrite.appliance.SlotUnit;
 
 /**
  * A Slot Unit that is capable of running Pig Latin Scripts
+ *
  * @author anil
  */
 public class ApachePigSlotUnit extends AbstractSlotUnit implements SlotUnit {
@@ -23,29 +24,28 @@ public class ApachePigSlotUnit extends AbstractSlotUnit implements SlotUnit {
 
     protected String pigScriptName = null;
 
-    protected Map<String,String> params = null;
+    protected Map<String, String> params = null;
 
     protected List<String> paramFiles = null;
 
-    public void setParams(Map<String,String> p){
+    public void setParams(Map<String, String> p) {
         params = p;
     }
 
-    public void setParamFiles(List<String> p){
+    public void setParamFiles(List<String> p) {
         paramFiles = p;
     }
 
-
     @Override
     public void execute() {
-        if(pigScriptName == null || pigScriptName.isEmpty()){
+        if (pigScriptName == null || pigScriptName.isEmpty()) {
             pigScriptName = (String) options.get(PIG_SCRIPT_NAME);
         }
-        if(pigScriptName == null){
+        if (pigScriptName == null) {
             throw new IllegalStateException("Pig Script Name has not been configured");
         }
         String mode = (String) options.get(PIG_MODE);
-        if(mode == null || mode.isEmpty()){
+        if (mode == null || mode.isEmpty()) {
             mode = LOCAL;
         }
         PigServer pigServer = null;
@@ -55,9 +55,9 @@ public class ApachePigSlotUnit extends AbstractSlotUnit implements SlotUnit {
             pigServer.setBatchOn();
             pigServer.debugOn();
             InputStream is = getClass().getClassLoader().getResourceAsStream(pigScriptName);
-            if(params != null){
+            if (params != null) {
                 pigServer.registerScript(is, params);
-            } else if(paramFiles != null){
+            } else if (paramFiles != null) {
                 pigServer.registerScript(is, paramFiles);
             } else {
                 pigServer.registerScript(is);
@@ -66,7 +66,7 @@ public class ApachePigSlotUnit extends AbstractSlotUnit implements SlotUnit {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            if(pigServer != null){
+            if (pigServer != null) {
                 pigServer.shutdown();
             }
         }

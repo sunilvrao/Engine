@@ -23,7 +23,7 @@ public class Appliance implements Lifecycle {
     public Appliance(String name) {
         this.name = name;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -49,7 +49,7 @@ public class Appliance implements Lifecycle {
     }
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see Lifecycle#setUp()
      */
     @Override
@@ -70,7 +70,7 @@ public class Appliance implements Lifecycle {
     }
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see Lifecycle#tearDown()
      */
     @Override

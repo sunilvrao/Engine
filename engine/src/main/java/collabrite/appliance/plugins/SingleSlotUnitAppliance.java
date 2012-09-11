@@ -9,21 +9,22 @@ import collabrite.appliance.slot.SequentialSlot;
 
 /**
  * Represents an {@link Appliance} that has just one {@link SlotUnit}
+ *
  * @author anil
  */
 public class SingleSlotUnitAppliance extends Appliance {
-    
+
     @SuppressWarnings("unchecked")
-    public SingleSlotUnitAppliance(String theName, SlotUnit unit){
+    public SingleSlotUnitAppliance(String theName, SlotUnit unit) {
         super(theName);
-        if(unit == null){
+        if (unit == null) {
             throw new IllegalArgumentException("unit is null");
         }
         Slot slot = new SequentialSlot();
         slot.addSlotUnit(unit);
-        
-        ApplianceUnit appunit = new ApplianceUnit(Arrays.asList(new Slot[]{slot}));
-        
+
+        ApplianceUnit appunit = new ApplianceUnit(Arrays.asList(new Slot[] { slot }));
+
         this.units.add(appunit);
     }
 }

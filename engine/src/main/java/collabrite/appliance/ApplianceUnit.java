@@ -47,7 +47,7 @@ public class ApplianceUnit implements Lifecycle {
     }
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see Lifecycle#setUp()
      */
     @Override
@@ -68,7 +68,7 @@ public class ApplianceUnit implements Lifecycle {
     }
 
     /**
-     * @throws IOException 
+     * @throws IOException
      * @see Lifecycle#tearDown()
      */
     @Override

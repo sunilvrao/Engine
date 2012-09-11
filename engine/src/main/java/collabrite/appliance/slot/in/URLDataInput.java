@@ -15,6 +15,7 @@ import collabrite.appliance.DataInput;
 public class URLDataInput extends AbstractDataInput<InputStream> implements DataInput<InputStream> {
 
     protected URL theURL = null;
+
     @Override
     public InputStream open() throws IOException {
         return theURL.openStream();

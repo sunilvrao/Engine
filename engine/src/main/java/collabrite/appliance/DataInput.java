@@ -10,12 +10,14 @@ import java.io.IOException;
 public interface DataInput<T> extends MapBasedOptions {
     /**
      * Initialize the data input
+     *
      * @throws IOException
      */
     void initialize() throws IOException;
-    
+
     /**
      * Open the data input
+     *
      * @return
      * @throws IOException
      */
@@ -23,6 +25,7 @@ public interface DataInput<T> extends MapBasedOptions {
 
     /**
      * Clean up any state or resources
+     *
      * @throws IOException
      */
     void cleanUp() throws IOException;

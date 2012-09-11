@@ -13,14 +13,11 @@ import collabrite.appliance.Appliance;
 public class ApplianceSpringConfigTestCase {
 
     @Test
-    public void testAppliance() throws Exception{
-        ApplicationContext context = new ClassPathXmlApplicationContext(
-                "appliance/config/spring/appliance.xml");
+    public void testAppliance() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("appliance/config/spring/appliance.xml");
         BeanFactory factory = context;
-        Appliance appliance = (Appliance) factory
-                .getBean("appliance");
+        Appliance appliance = (Appliance) factory.getBean("appliance");
         assertNotNull(appliance);
-        
 
         appliance.setUp();
         appliance.execute();

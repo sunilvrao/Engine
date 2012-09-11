@@ -13,7 +13,7 @@ import collabrite.data.source.facebook.FacebookPublicSearching;
 
 /**
  * An instance of {@link SlotUnit} for Facebook Public Posts
- * 
+ *
  * @author anil
  */
 public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
@@ -25,10 +25,10 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
     protected List<String> ignoreList = new ArrayList<String>();
 
     protected int messageLengthFilter = -1;
-    
+
     /**
      * Set the search term
-     * 
+     *
      * @param searchTerm
      */
     public void setSearchTerm(String searchTerm) {
@@ -37,16 +37,16 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
 
     /**
      * Add a set of terms which when present will make the facebook post, ignored for insertion into data store
-     * 
+     *
      * @param list
      */
     public void setIgnoreList(List<String> list) {
         ignoreList.addAll(list);
-    } 
+    }
 
     /**
-     * If the message is greater than the set limit, it will be discarded
-     * Default is -1: No limit
+     * If the message is greater than the set limit, it will be discarded Default is -1: No limit
+     *
      * @param messageLengthFilter
      */
     public void setMessageLengthFilter(int messageLengthFilter) {
@@ -84,7 +84,7 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
     }
 
     private boolean continueWithPost(String message) {
-        if(message != null){
+        if (message != null) {
             message = message.trim();
         }
         if (message != null) {
@@ -94,9 +94,9 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
                 }
             }
         }
-        if(messageLengthFilter != -1){
-            //there is a limit
-            if(message != null && message.length() > messageLengthFilter){
+        if (messageLengthFilter != -1) {
+            // there is a limit
+            if (message != null && message.length() > messageLengthFilter) {
                 return false;
             }
         }

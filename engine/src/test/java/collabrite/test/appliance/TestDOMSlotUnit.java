@@ -9,6 +9,7 @@ import collabrite.appliance.util.DocumentUtil;
 
 /**
  * Test {@link SlotUnit}
+ *
  * @author anil
  */
 public class TestDOMSlotUnit extends TestSlotUnit implements SlotUnit {
@@ -16,9 +17,9 @@ public class TestDOMSlotUnit extends TestSlotUnit implements SlotUnit {
 
     @Override
     public void execute() {
-        try {            
+        try {
             Document dom = (Document) input.open();
-            output.store(DocumentUtil.asString(dom).getBytes()); 
+            output.store(DocumentUtil.asString(dom).getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -19,7 +19,7 @@ import collabrite.appliance.util.DocumentUtil;
 public class DOMDataInput extends AbstractDataInput<Document> implements DataInput<Document> {
 
     protected String fileName;
-    
+
     @Override
     public Document open() throws IOException {
         try {
@@ -28,17 +28,17 @@ public class DOMDataInput extends AbstractDataInput<Document> implements DataInp
             throw new RuntimeException(e);
         }
     }
-    
-    private InputStream getFile(String fileName) throws IOException{
+
+    private InputStream getFile(String fileName) throws IOException {
         File file = new File(fileName);
-        if(file.exists() == false)
+        if (file.exists() == false)
             return getClass().getClassLoader().getResourceAsStream(fileName);
         return new FileInputStream(file);
     }
 
     @Override
     public void initialize() throws IOException {
-        if(fileName == null){
+        if (fileName == null) {
             fileName = (String) options.get(ApplianceConstants.NAME);
         }
         if (fileName == null || fileName.isEmpty())

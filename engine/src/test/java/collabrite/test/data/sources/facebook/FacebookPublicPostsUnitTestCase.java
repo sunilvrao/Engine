@@ -13,19 +13,20 @@ import com.restfb.types.Post;
 
 /**
  * Unit Test the Public Posts from Facebook
+ *
  * @author anil
  */
 public class FacebookPublicPostsUnitTestCase {
 
-    @Test 
+    @Test
     @Ignore
-    public void testSearch() throws Exception{
+    public void testSearch() throws Exception {
         FacebookPublicSearching search = new FacebookPublicSearching();
         Connection<Post> connection = search.getConnectionForPublicPosts("walgreens");
         Iterator<List<Post>> iterator = connection.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             List<Post> list = iterator.next();
-            for(Post post: list){
+            for (Post post : list) {
                 System.out.println(post);
             }
         }

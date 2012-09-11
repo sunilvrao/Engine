@@ -8,11 +8,12 @@ import collabrite.data.source.facebook.FacebookPageLikes;
 
 /**
  * Unit test the {@link FacebookPageLikes}
+ *
  * @author anil
  */
 public class FacebookPageLikesTestCase {
     @Test
-    public void testOPPL() throws Exception{
+    public void testOPPL() throws Exception {
         FacebookPageLikes likes = new FacebookPageLikes("oakparkpubliclibrary");
         long count = likes.getNumberOfLikes();
         System.out.println("Like Count=" + count);

@@ -54,7 +54,7 @@ public class RelationshipBuilder {
     public void initialize() {
         graphDb = new EmbeddedGraphDatabase(DB_PATH);
         registerShutdownHook(graphDb);
-        setAutoIndexerProperties(new String[] {"name"}); //by default, auto index name
+        setAutoIndexerProperties(new String[] { "name" }); // by default, auto index name
         initialized = true;
     }
 
@@ -164,52 +164,54 @@ public class RelationshipBuilder {
         list.toArray(results);
         return results;
     }
-    
+
     /**
      * Get Related Nodes
+     *
      * @param node
      * @param relationship
      * @param direction
      * @return
      * @throws RelationshipException
      */
-    public Iterable<Relationship> getRelatedNodes(Node node, String relationship, Direction direction) throws RelationshipException{
+    public Iterable<Relationship> getRelatedNodes(Node node, String relationship, Direction direction)
+            throws RelationshipException {
         check();
         RelationshipType relationshipType = RelationshipTypeCollection.get(relationship);
         return node.getRelationships(Direction.OUTGOING, relationshipType);
     }
-    
+
     /**
      * Get the auto index to search
+     *
      * @return
      */
-    public ReadableIndex<Node> getAutoIndex(){
-        return graphDb.index()
-                .getNodeAutoIndexer()
-                .getAutoIndex();
+    public ReadableIndex<Node> getAutoIndex() {
+        return graphDb.index().getNodeAutoIndexer().getAutoIndex();
     }
-    
+
     /**
      * Set properties to auto index
+     *
      * @param properties
      */
-    public void setAutoIndexerProperties(String[] properties){
-        AutoIndexer<Node> nodeAutoIndexer = graphDb.index()
-                .getNodeAutoIndexer();
-        for(String prop: properties){
-            nodeAutoIndexer.startAutoIndexingProperty( prop ); 
+    public void setAutoIndexerProperties(String[] properties) {
+        AutoIndexer<Node> nodeAutoIndexer = graphDb.index().getNodeAutoIndexer();
+        for (String prop : properties) {
+            nodeAutoIndexer.startAutoIndexingProperty(prop);
         }
         nodeAutoIndexer.setEnabled(true);
     }
-    
+
     /**
      * Check whether a node has property
+     *
      * @param node
      * @param propertyName
      * @return
      * @throws RelationshipException
      */
-    public boolean hasProperty(long node, String propertyName) throws RelationshipException{
+    public boolean hasProperty(long node, String propertyName) throws RelationshipException {
         check();
         Node node1 = graphDb.getNodeById(node);
         return node1.hasProperty(propertyName);
@@ -227,22 +229,24 @@ public class RelationshipBuilder {
         Node node1 = graphDb.getNodeById(node);
         return node1.getPropertyKeys();
     }
-    
+
     /**
      * Return a {@link Node} given its name
+     *
      * @param name
      * @return
      */
-    public Node getNodeWithName(String name){ 
+    public Node getNodeWithName(String name) {
         ReadableIndex<Node> autoNodeIndex = getAutoIndex();
-        return autoNodeIndex.get( "name", name ).getSingle() ;
+        return autoNodeIndex.get("name", name).getSingle();
     }
-    
+
     /**
      * Get all the nodes stored
+     *
      * @return
      */
-    public Iterable<Node> getNodes(){
+    public Iterable<Node> getNodes() {
         GlobalGraphOperations go = GlobalGraphOperations.at(graphDb);
         return go.getAllNodes();
     }
@@ -258,8 +262,8 @@ public class RelationshipBuilder {
     public Object getProperty(long node, String key) throws RelationshipException {
         check();
         Node node1 = graphDb.getNodeById(node);
-        
-        if(node1.hasProperty(key) == false){
+
+        if (node1.hasProperty(key) == false) {
             return null;
         }
 

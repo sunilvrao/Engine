@@ -27,7 +27,7 @@ public abstract class AbstractDataInput<T> implements DataInput<T> {
     public boolean removeOption(String key) {
         return options.remove(key) != null;
     }
- 
+
     public void setOptions(Map<String, Object> theMap) {
         options.putAll(theMap);
     }
@@ -38,18 +38,19 @@ public abstract class AbstractDataInput<T> implements DataInput<T> {
     }
 
     @Override
-    public abstract T open() throws IOException; 
-    
-    protected void safeClose(OutputStream fos){
-        if(fos != null){
+    public abstract T open() throws IOException;
+
+    protected void safeClose(OutputStream fos) {
+        if (fos != null) {
             try {
                 fos.close();
             } catch (IOException e) {
             }
         }
     }
-    protected void safeClose(InputStream is){
-        if(is != null){
+
+    protected void safeClose(InputStream is) {
+        if (is != null) {
             try {
                 is.close();
             } catch (IOException e) {

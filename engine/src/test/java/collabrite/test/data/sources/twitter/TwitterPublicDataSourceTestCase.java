@@ -21,9 +21,9 @@ public class TwitterPublicDataSourceTestCase {
         System.setProperty("twitter4j.debug", "true");
         TwitterPublicDataSource ds = new TwitterPublicDataSource();
         QueryResult result = ds.query("bosch tools", "en");
-        
+
         FileOutputStream fos = new FileOutputStream("/tmp/tweet.dat");
-        ObjectOutputStream       out = new ObjectOutputStream(fos);
+        ObjectOutputStream out = new ObjectOutputStream(fos);
         out.writeObject(result);
         out.close();
         display(result);

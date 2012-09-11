@@ -8,25 +8,18 @@ import com.restfb.types.Post;
 
 public class FacebookPublicSearching {
     protected FacebookClient publicOnlyFacebookClient = new DefaultFacebookClient();
-    
-    public Connection<Post> getConnectionForPublicPosts(String query){
-        return publicOnlyFacebookClient.fetchConnection("search", Post.class,
-                Parameter.with("q", query), 
-                Parameter.with("limit", 100),
-                Parameter.with("type", "post"));
+
+    public Connection<Post> getConnectionForPublicPosts(String query) {
+        return publicOnlyFacebookClient.fetchConnection("search", Post.class, Parameter.with("q", query),
+                Parameter.with("limit", 100), Parameter.with("type", "post"));
     }
-     
-/*
-    public void getPublicPosts(String query, FacebookSearchType type){ 
-        
-        Connection<Post> publicSearch =
-                publicOnlyFacebookClient.fetchConnection("search", Post.class,
-                        Parameter.with("q", query), 
-                        Parameter.with("type", type.name()));
-        
-        List<Post> data = publicSearch.getData();
-        for(Post post: data){
-            System.out.println(post);
-        }
-    }*/
+
+    /*
+     * public void getPublicPosts(String query, FacebookSearchType type){
+     *
+     * Connection<Post> publicSearch = publicOnlyFacebookClient.fetchConnection("search", Post.class, Parameter.with("q",
+     * query), Parameter.with("type", type.name()));
+     *
+     * List<Post> data = publicSearch.getData(); for(Post post: data){ System.out.println(post); } }
+     */
 }

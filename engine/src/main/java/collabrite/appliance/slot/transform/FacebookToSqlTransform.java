@@ -22,8 +22,8 @@ import com.restfb.types.Post.Privacy;
 import com.restfb.types.Post.Property;
 
 /**
- * An instance of {@link DataTransform} that converts a facebook post
- * into a sql record
+ * An instance of {@link DataTransform} that converts a facebook post into a sql record
+ *
  * @author anil
  */
 public class FacebookToSqlTransform extends AbstractSqlTransform {
@@ -33,24 +33,24 @@ public class FacebookToSqlTransform extends AbstractSqlTransform {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         Post facebookPost = (Post) transform;
-        try{
+        try {
             conn = getConnection();
-            if(exists(facebookPost, conn)) 
+            if (exists(facebookPost, conn))
                 return null;
 
-            preparedStatement = getStatement(conn);   
+            preparedStatement = getStatement(conn);
 
             preparedStatement.setString(1, getActions(facebookPost));
-            preparedStatement.setString(2, getApplications(facebookPost) );
-            preparedStatement.setString(3, facebookPost.getAttribution() );
-            preparedStatement.setString(4, facebookPost.getCaption() );
-            preparedStatement.setString(5, getComments(facebookPost) );
+            preparedStatement.setString(2, getApplications(facebookPost));
+            preparedStatement.setString(3, facebookPost.getAttribution());
+            preparedStatement.setString(4, facebookPost.getCaption());
+            preparedStatement.setString(5, getComments(facebookPost));
             preparedStatement.setTimestamp(6, new Timestamp(facebookPost.getCreatedTime().getTime()));
-            preparedStatement.setString(7, facebookPost.getDescription() );
+            preparedStatement.setString(7, facebookPost.getDescription());
             preparedStatement.setString(8, getFrom(facebookPost));
             preparedStatement.setString(9, facebookPost.getIcon());
             preparedStatement.setString(10, getLikes(facebookPost));
-            preparedStatement.setString(11, ""+facebookPost.getLikesCount());
+            preparedStatement.setString(11, "" + facebookPost.getLikesCount());
             preparedStatement.setString(12, facebookPost.getLink());
             preparedStatement.setString(13, facebookPost.getMessage());
             preparedStatement.setString(14, getMetadata(facebookPost));
@@ -64,22 +64,21 @@ public class FacebookToSqlTransform extends AbstractSqlTransform {
             preparedStatement.setString(22, getTo(facebookPost));
             preparedStatement.setTimestamp(23, new Timestamp(facebookPost.getUpdatedTime().getTime()));
             preparedStatement.setString(24, facebookPost.getId());
-            
 
             int count = preparedStatement.executeUpdate();
             System.out.println("Count=" + count);
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new IOException(e);
-        }finally{
+        } finally {
             safeClose(preparedStatement);
             safeClose(conn);
         }
         return null;
     }
 
-    private boolean exists(Post post, Connection conn){
+    private boolean exists(Post post, Connection conn) {
         PreparedStatement stmt = null;
-        try{
+        try {
             String sql = "SELECT COUNT(*) FROM fbdata where id = ?";
             conn = getConnection();
             stmt = conn.prepareStatement(sql);
@@ -89,76 +88,77 @@ public class FacebookToSqlTransform extends AbstractSqlTransform {
 
             // Get the number of rows from the result set
             resultSet.next();
-            int rowcount = resultSet.getInt(1);  
-            if(rowcount > 0)
+            int rowcount = resultSet.getInt(1);
+            if (rowcount > 0)
                 return true;
             else
                 return false;
-        } catch(Exception e){
+        } catch (Exception e) {
             return false;
-        }finally{
-            safeClose(stmt); 
+        } finally {
+            safeClose(stmt);
         }
     }
-    
-    private String getTo(Post post){
+
+    private String getTo(Post post) {
         List<NamedFacebookType> list = post.getTo();
         return getListNamedFacebookType(list);
     }
-    
-    private String getPrivacy(Post post){
+
+    private String getPrivacy(Post post) {
         Privacy p = post.getPrivacy();
-        if(p != null){
+        if (p != null) {
             return p.toString();
         }
         return null;
     }
-    private String getPlace(Post post){
+
+    private String getPlace(Post post) {
         Place place = post.getPlace();
-        if(place != null)
+        if (place != null)
             return place.toString();
         return null;
     }
-    
-    private String getProperties(Post post){
+
+    private String getProperties(Post post) {
         List<Property> list = post.getProperties();
-        if(list != null){
+        if (list != null) {
             return list.toString();
         }
         return null;
     }
 
-    private String getActions(Post post){
+    private String getActions(Post post) {
         List<Action> actions = post.getActions();
         int len = actions != null ? actions.size() : 0;
         StringBuilder builder = new StringBuilder();
-        for(int i = 0 ; i < len ; i++){
+        for (int i = 0; i < len; i++) {
             Action action = actions.get(i);
             builder.append("(").append(action.getLink()).append(",").append(action.getName()).append(")");
         }
         return builder.toString();
     }
-    
-    private String getApplications(Post post){
-        NamedFacebookType nf  = post.getApplication();
+
+    private String getApplications(Post post) {
+        NamedFacebookType nf = post.getApplication();
         return getNamedFacebookType(nf);
     }
-    
-    private String getNamedFacebookType(NamedFacebookType nf){
-        if(nf != null){
+
+    private String getNamedFacebookType(NamedFacebookType nf) {
+        if (nf != null) {
             return "(" + nf.getId() + "," + nf.getName() + "," + nf.getType() + ")";
         }
         return null;
     }
-    
-    private String getComments(Post post){
+
+    private String getComments(Post post) {
         Comments comments = post.getComments();
         StringBuilder builder = new StringBuilder();
-        if(comments != null){
+        if (comments != null) {
             builder.append(comments.getCount());
             List<Comment> data = comments.getData();
-            if(data != null){
-                for(Comment comment: data){
+            if (data != null) {
+                for (Comment comment : data) {
                     builder.append("(").append(comment.getId()).append(",").append(comment.getMessage());
                     builder.append(",").append(comment.getType()).append(")");
                 }
@@ -166,77 +166,53 @@ public class FacebookToSqlTransform extends AbstractSqlTransform {
         }
         return builder.toString();
     }
-    
-    private String getMetadata(Post post){
+
+    private String getMetadata(Post post) {
         Metadata md = post.getMetadata();
-        if(md != null){
+        if (md != null) {
             return md.toString();
         }
         return null;
     }
-    
-    private String getFrom(Post post){
+
+    private String getFrom(Post post) {
         CategorizedFacebookType cft = post.getFrom();
         return cft.getId() + "," + cft.getName() + "," + cft.getType();
     }
-    
-    private String getLikes(Post post){
+
+    private String getLikes(Post post) {
         Likes likes = post.getLikes();
-        if(likes != null){
+        if (likes != null) {
             List<NamedFacebookType> list = likes.getData();
-            return getListNamedFacebookType(list);   
+            return getListNamedFacebookType(list);
         }
         return null;
     }
-    
-    private String getListNamedFacebookType(List<NamedFacebookType> list){
+
+    private String getListNamedFacebookType(List<NamedFacebookType> list) {
         StringBuilder builder = new StringBuilder();
-        if(list != null){
-            for(NamedFacebookType nft: list){
+        if (list != null) {
+            for (NamedFacebookType nft : list) {
                 builder.append(getNamedFacebookType(nft));
             }
         }
         return builder.toString();
     }
 
-
     private PreparedStatement getStatement(Connection conn) throws Exception {
 
         /*
-             CREATE TABLE fbdata
-(
-  actions text, -- csv of actions such as link,comments etc
-  applications text, -- The application used to create this post.
-  attribution text, -- Application Attribution
-  caption text,
-  comments text,
-  createdtime timestamp with time zone,
-  descr text, -- Description
-  fromuser text, -- id,user name
-  icon text,
-  likes text, -- Number::(id,name)(id,name)
-  likescount text,
-  link text,
-  message text,
-  metadata text,
-  name text,
-  objectid text,
-  picture text,
-  place text,
-  privacy text,
-  props text,
-  source text,
-  touser text,
-  updated timestamp with time zone,
-  id text
-)
-
+         * CREATE TABLE fbdata ( actions text, -- csv of actions such as link,comments etc applications text, -- The application
+         * used to create this post. attribution text, -- Application Attribution caption text, comments text, createdtime
+         * timestamp with time zone, descr text, -- Description fromuser text, -- id,user name icon text, likes text, --
+         * Number::(id,name)(id,name) likescount text, link text, message text, metadata text, name text, objectid text, picture
+         * text, place text, privacy text, props text, source text, touser text, updated timestamp with time zone, id text )
          */
         // Prepare a statement to insert a record
-        String sql = "INSERT INTO fbdata (actions,applications,attribution,caption,comments,createdtime," +
-                "descr, fromuser, icon, likes, likescount,link,message, metadata, name," +
-                "objectid, picture,place,privacy, props,source,touser, updated,id)" + 
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        return conn.prepareStatement(sql);   
+        String sql = "INSERT INTO fbdata (actions,applications,attribution,caption,comments,createdtime,"
+                + "descr, fromuser, icon, likes, likescount,link,message, metadata, name,"
+                + "objectid, picture,place,privacy, props,source,touser, updated,id)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return conn.prepareStatement(sql);
     }
 }

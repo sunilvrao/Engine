@@ -13,25 +13,23 @@ public class TwitterToPostgres {
 
     @Test
     @Ignore
-    public void store() throws Exception{
+    public void store() throws Exception {
         FileInputStream fos = new FileInputStream("/tmp/tweet.dat");
-        ObjectInputStream       in = new ObjectInputStream(fos);
+        ObjectInputStream in = new ObjectInputStream(fos);
         QueryResult result = (QueryResult) in.readObject();
-        storeInPostgres( result);
+        storeInPostgres(result);
     }
-    
 
-    private void storeInPostgres(QueryResult result) throws Exception{
-        
+    private void storeInPostgres(QueryResult result) throws Exception {
+
         TweetToSqlTransform transform = new TweetToSqlTransform();
         transform.setDatabaseDriverName("org.postgresql.Driver");
-        
+
         transform.setJdbcURL("jdbc:postgresql://localhost/collabrite");
-        
 
         transform.setUsername("collabrite");
         transform.setPassword("collabrite");
-        
+
         transform.transform(result);
     }
 }

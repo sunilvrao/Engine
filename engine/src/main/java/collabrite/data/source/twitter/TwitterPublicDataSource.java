@@ -12,10 +12,10 @@ import twitter4j.TwitterFactory;
  * @author anil
  */
 public class TwitterPublicDataSource {
-    
+
     private int page = 1;
-    
-    public void setPage(int page){
+
+    public void setPage(int page) {
         this.page = page;
     }
 

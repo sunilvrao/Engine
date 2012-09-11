@@ -11,17 +11,18 @@ import collabrite.appliance.SlotUnit;
 
 /**
  * Test {@link SlotUnit}
+ *
  * @author anil
  */
 public class TestSlotUnit implements SlotUnit {
     private static final long serialVersionUID = 1L;
-    
+
     protected DataInput<?> input;
     protected DataOutput output;
     protected boolean finished = false;
 
     @Override
-    public void setUp() { 
+    public void setUp() {
         try {
             input.initialize();
             output.initialize();
@@ -32,14 +33,15 @@ public class TestSlotUnit implements SlotUnit {
 
     @Override
     public void execute() {
-        try {            
+        try {
             InputStream is = (InputStream) input.open();
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
             String line = null;
-            while((line = in.readLine()) != null) {
+            while ((line = in.readLine()) != null) {
                 output.store(line.getBytes());
             }
-            if(is != null) is.close();
+            if (is != null)
+                is.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -72,7 +74,7 @@ public class TestSlotUnit implements SlotUnit {
     }
 
     @Override
-    public DataOutput getDataOutput() { 
+    public DataOutput getDataOutput() {
         return output;
     }
 

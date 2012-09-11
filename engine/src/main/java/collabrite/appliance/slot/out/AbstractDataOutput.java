@@ -17,11 +17,11 @@ import collabrite.appliance.DataTransform;
  * @author anil
  */
 public abstract class AbstractDataOutput implements DataOutput {
-    
+
     protected DataTransform dataTransform = null;
 
     protected Map<String, Object> options = new HashMap<String, Object>();
-    
+
     // Set the initialized flag
     protected boolean initialized = false;
 
@@ -33,7 +33,7 @@ public abstract class AbstractDataOutput implements DataOutput {
     @Override
     public boolean removeOption(String key) {
         return options.remove(key) != null;
-    } 
+    }
 
     /**
      * Set the data transform
@@ -51,17 +51,18 @@ public abstract class AbstractDataOutput implements DataOutput {
     public Map<String, Object> options() {
         return Collections.unmodifiableMap(options);
     }
-    
-    protected void safeClose(OutputStream fos){
-        if(fos != null){
+
+    protected void safeClose(OutputStream fos) {
+        if (fos != null) {
             try {
                 fos.close();
             } catch (IOException e) {
             }
         }
     }
-    protected void safeClose(InputStream is){
-        if(is != null){
+
+    protected void safeClose(InputStream is) {
+        if (is != null) {
             try {
                 is.close();
             } catch (IOException e) {
