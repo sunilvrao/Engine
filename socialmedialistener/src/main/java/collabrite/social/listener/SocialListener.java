@@ -30,9 +30,12 @@ public class SocialListener {
     private String jdbcurl, driver, dbuser, dbpass;
     private List<String> ignoreList = new ArrayList<String>();
 
-    private int delayBetweenBatches = 10; // 10secs
+    private int delayBetweenBatches = 60; // 60secs
 
-    private int messageLimit = 100;
+    private int messageLimit = 100;//Message length
+    
+    private int captionLimit = 100;//Caption length
+    
 
     public String getJdbcurl() {
         return jdbcurl;
@@ -149,6 +152,7 @@ public class SocialListener {
                 su.setSearchTerm(term);
                 su.setIgnoreList(ignoreList);
                 su.setMessageLengthFilter(this.messageLimit);
+                su.setCaptionLengthFilter(captionLimit);
 
                 DBDataOutput db = new DBDataOutput();
                 FacebookToSqlTransform transform = new FacebookToSqlTransform();
@@ -201,7 +205,7 @@ public class SocialListener {
                 su.setSearchTerm(term);
                 su.setMaxPage(50);
                 su.setOptions(options);
-                su.setDelay(12000); // 12 secs
+                su.setDelay(60000); // 60 secs
                 su.setSearchTerm(term);
 
                 DBDataOutput db = new DBDataOutput();

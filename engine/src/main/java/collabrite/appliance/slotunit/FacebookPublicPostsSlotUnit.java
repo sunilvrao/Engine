@@ -25,6 +25,8 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
     protected List<String> ignoreList = new ArrayList<String>();
 
     protected int messageLengthFilter = -1;
+    
+    protected int captionLengthFilter = -1;
 
     /**
      * Set the search term
@@ -52,6 +54,15 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
     public void setMessageLengthFilter(int messageLengthFilter) {
         this.messageLengthFilter = messageLengthFilter;
     }
+    
+    /**
+     * If the caption is greater than the set limit, it will be discarded Default is -1: No limit
+     *
+     * @param messageLengthFilter
+     */
+    public void setCaptionLengthFilter(int captionLengthFilter) {
+        this.captionLengthFilter = captionLengthFilter;
+    }
 
     @Override
     public void execute() {
@@ -71,6 +82,15 @@ public class FacebookPublicPostsSlotUnit extends AbstractSlotUnit {
                 // Go through the ignore list
                 if (!continueWithPost(post.getMessage())) {
                     continue;
+                }
+                //Check caption length
+                if(captionLengthFilter != -1){
+                    String caption = post.getCaption();
+                    if(caption != null && caption.isEmpty() == false){
+                      if(caption.length() > captionLengthFilter){
+                          continue;
+                      }
+                    }
                 }
                 try {
                     dataOutput.store(post);
